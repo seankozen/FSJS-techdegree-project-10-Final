@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {
+  BrowserRouter as 
+  Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
+
+//Component imports
+import Header from './components/Header';
+import CourseDetail from './components/CourseDetail';
+import Courses from './components/Courses';
+import CreateCourse from './components/CreateCourse';
+import UpdateCourse from './components/UpdateCourse';
+import UserSignIn from './components/UserSignIn';
+import UserSignOut from './components/UserSignOut';
+import UserSignUp from './components/UserSignUp';
+
+//Error component imports
+import UnhandledError from './components/UnhandledError';
+import Forbidden from './components/Forbidden';
+import NotFound from './components/NotFound';
+
+import withContext from './Context';
+
+// With context
+const HeaderWithContext = withContext(Header);
+const UserSignUpWithContext = withContext(UserSignUp);
+const UserSignInWithContext = withContext(UserSignIn);
+const UserSignOutWithContext = withContext(UserSignOut);
+const CourseDetailWithContext = withContext(CourseDetail);
+
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <div className = "container">
+      
+        <HeaderWithContext/>
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to="/courses"/>} />
+          <Route exact path="/courses" render={() => <Courses/>} />
+          <Route path="/courses/create" render = {() => <CreateCourse/>} />
+          <Route path="/courses/:id" component = {CourseDetailWithContext}  />
+          <Route path="/courses/:id/update" render = {() => <UpdateCourse/>} />
+          <Route path ="/signin" component = {UserSignInWithContext} />
+          <Route path = "/signup" component = {UserSignUpWithContext} />
+          <Route path = "/signout" component = {UserSignOutWithContext} />
+          <Route component = {NotFound} />
+        </Switch>
+      </div>
+    </Router>
+  )
 }
 
 export default App;
