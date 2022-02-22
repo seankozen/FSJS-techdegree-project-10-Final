@@ -45,11 +45,14 @@ function App() {
           <Route exact path="/courses" render={() => <Courses/>} />
           <Route path="/courses/create" render = {() => <CreateCourse/>} />
           <Route path="/courses/:id" component = {CourseDetailWithContext}  />
-          <Route path="/courses/:id/update" render = {() => <UpdateCourse/>} />
+          <Route path="/courses/update" render = {() => <UpdateCourse/>} />    {/*Need to change path later*/}
           <Route path ="/signin" component = {UserSignInWithContext} />
           <Route path = "/signup" component = {UserSignUpWithContext} />
           <Route path = "/signout" component = {UserSignOutWithContext} />
-          <Route component = {NotFound} />
+          <Route path = "/notfound" component = {NotFound} />
+          <Route path = "/forbidden" component = {Forbidden} />
+          <Route path = "/error" component = {UnhandledError} />
+          
         </Switch>
       </div>
     </Router>

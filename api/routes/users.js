@@ -11,6 +11,7 @@ router.get("/", authenticateUser, asyncHandler( async (req, res) => {
 	const user = req.currentUser;
 	res.status(200);
 	res.json({
+		id:user.id,
 		firstName: user.firstName,
 		lastName: user.lastName,
 		emailAddress: user.emailAddress

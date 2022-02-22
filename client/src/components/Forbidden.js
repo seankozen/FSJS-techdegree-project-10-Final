@@ -1,12 +1,12 @@
 import React from 'react';
 
-const forbidden = () => {
+const Forbidden = () => {
     return (
         <div class="wrap">
             <h2>Forbidden</h2>
-            <p>Oh oh! You can't access this page.</p>
+            <p>You are not authorized to view this page.</p>
         </div>
     );
 };
 
-export default forbidden;
+export default Forbidden;

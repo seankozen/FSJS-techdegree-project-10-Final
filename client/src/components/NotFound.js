@@ -4,7 +4,7 @@ const pageNotFound = () => {
     return (
         <div className="wrap">
             <h2>Not Found</h2>
-            <p>Sorry! We couldn't find the page you're looking for.</p>
+            <p>Sorry! The page you are looking for does not exist.</p>
         </div>
     );
 }; 
