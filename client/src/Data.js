@@ -74,6 +74,7 @@ export default class Data {
         if (response.status === 200) {
             return response.json().then(data => data);
         } else if (response.status === 404) {
+            console.log(response.status);    // Remove later
             return response.status;
         } else {
             throw new Error();

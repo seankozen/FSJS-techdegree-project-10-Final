@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect} from 'react';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import Form from './Form';
 import { Context } from '../Context';
 
@@ -7,12 +7,8 @@ function UpdateCourse() {
     
     const context = useContext(Context);
     const history = useHistory();
-    const location = useLocation();
     const authUser = context.authenticatedUser;
     const { id } = useParams();
-
-    // Return path after course creation
-    const { from } = location.state || { from: { pathname: "/"} }
 
     // Component states
     const[title, setTitle] = useState('');
@@ -27,7 +23,7 @@ function UpdateCourse() {
     useEffect(() => {
         context.data.getCourse(id)
             .then (response => {
-                    if(response.status === 404) {
+                    if(response === 404) {
                         history.push('/notfound');
                     } else {
                         setTitle(response.course.title);

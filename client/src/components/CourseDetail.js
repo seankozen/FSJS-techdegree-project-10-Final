@@ -19,9 +19,8 @@ const CourseDetail = () => {
     useEffect(() => {
         context.data.getCourse(id)
             .then ((response) => {
-                    if(response.status === 404) {
+                    if(response.status === 404) {    // Should be response === 404
                         history.push('/notfound');
-                       
                     } else {
                         setCourseDetails(response.course);
                         setUser(response.course.User);
@@ -37,7 +36,7 @@ const CourseDetail = () => {
     },[context, history, id]);
 
      
-console.log(isLoading);
+//console.log(isLoading);  Remove later
 
 
    // Handle course deletion 
@@ -63,7 +62,8 @@ console.log(isLoading);
                 history.push('./error');
             })
     };
- 
+
+//Remove this later    
 if (authUser) {
     console.log(authUser);
     console.log(authUser.emailAddress);
