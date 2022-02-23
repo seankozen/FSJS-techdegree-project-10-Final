@@ -2,7 +2,7 @@ import React from 'react';
 
 const unhandledError = () => {
     return (
-        <div class="wrap">
+        <div className="wrap">
             <h2>Error</h2>
             <p>Sorry! An unexpected error occurred.</p>
         </div>

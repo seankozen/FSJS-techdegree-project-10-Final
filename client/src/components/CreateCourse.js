@@ -35,8 +35,8 @@ function CreateCourse () {
         }
     }
 
+    // Handle submission of new course data
     const submit = () => {
-
         const course = {
             title,
             description,
@@ -59,23 +59,13 @@ function CreateCourse () {
                 console.error(errors);
                 history.push('/error');  // Push to history stack
             });
-
-
     }
-
-
-
-
-
-
 
     // Cancel button
     const cancel = () => {
         history.push(from);
     }
 
-
-    
     return ( 
         <div className="wrap">
             <h2>Create Course</h2>
@@ -98,7 +88,7 @@ function CreateCourse () {
                                     onChange={change}
                                     placeholder="Course Title"
                                 />
-                                
+                            
                                 <p>By {`${authUser.firstName} ${authUser.lastName}`}</p>
 
                                 <label htmlFor="courseDescription">Course Description</label>
@@ -129,10 +119,8 @@ function CreateCourse () {
                         </div>
                     </React.Fragment>
                 )}/>
-        </div>
-        
+        </div> 
     );
-
 }
 
 export default CreateCourse;

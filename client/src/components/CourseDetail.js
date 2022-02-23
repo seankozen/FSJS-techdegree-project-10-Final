@@ -16,45 +16,36 @@ const CourseDetail = () => {
    const [isLoading, setLoadingState] = useState(true);
    
 
-    // Retrieve course data
+   // Retrieve course data
     useEffect(() => {
         context.data.getCourse(id)
-            .then (response => {
+            .then ((response) => {
                     if(response.status === 404) {
                         history.push('/notfound');
                     } else {
                         setCourseDetails(response.course);
                         setUser(response.course.User);
-                        setLoadingState(false);   //Indicates loading is done and page can be rendered
-                    }    
+                        //setLoadingState(false);   //Indicates loading is done and page can be rendered
+                    }   
             })
             .catch(error => {
                 console.error(error);
                 history.push('./error');
-            });  
+            })  
+            .finally(() => {
+                setLoadingState(false);
+            });
     },[context, history, id]);
 
      
 console.log(isLoading);
 
 
-/* 
-  if(!isLoading){
-        //console.log(courseDetails.id); 
-        console.log(authUser.emailAddress); //Logged in user's emailaddress
-        console.log(user);  
-        //console.log(courseDetails.id);
-        console.log(authUser.id);
-    }  */
-
-
+   // Handle course deletion 
    const handleCourseDelete = () => {
-        context.data.deleteCourse(courseDetails.id, authUser.emailAddress, authUser.password)
+        context.data.deleteCourse(id, authUser.emailAddress, authUser.password)
             .then(response => {
-                if(response.status === 204){
-                    console.log('Course deleted');
-                    history.push('/courses');
-                } else if(response.status === 401) {
+                if(response.status === 401) {
                     history.push('/forbidden')
                     console.log('You are not authorized to view this page!')
                 } else if(response.status === 404) {
@@ -64,7 +55,8 @@ console.log(isLoading);
                     history.push('/error');
                     console.log('An unexpected error has occurred!')
                 } else {
-                    throw new Error();
+                    console.log('Course deleted');
+                    history.push('/courses');
                 }
             })
             .catch(error => {
@@ -72,24 +64,26 @@ console.log(isLoading);
                 history.push('./error');
             })
     };
-
+ 
+if (authUser) {
     console.log(authUser);
     console.log(authUser.emailAddress);
     console.log(authUser.password);
     console.log(authUser.id);
- 
+}
+  
 
     return (
-        isLoading ?
+       isLoading ?
             <h2>Loading...</h2>
-        :    
+        :  (  
         
        <React.Fragment>
             <div className="actions--bar">
                 <div className="wrap">
                     { authUser && user.emailAddress === authUser.emailAddress ? (
                         <React.Fragment>
-                            <Link className="button" to="/courses/update/">Update Course</Link>    {/* Need to change link later */}
+                            <Link className="button" to={`/courses/${id}/update/`}>Update Course</Link>    {/* Need to change link later */}
                             <button className="button" onClick={handleCourseDelete} >Delete Course</button>
                             <Link className="button button-secondary" to="/courses">Return to List</Link>  
                         </React.Fragment>
@@ -107,10 +101,10 @@ console.log(isLoading);
                     <div className="main--flex">
                         <div>
                             <h3 className="course--detail--title">Course</h3>
-                            {courseDetails ?
+                            {/* {courseDetails ? */}
                             <h4 className="course--name">{courseDetails.title}</h4>
-                            : <h4>Loading...</h4>
-                            }
+                            {/* : <h4>Loading...</h4>
+                            } */}
                             <p>{courseDetails.User.firstName} {courseDetails.User.lastName}</p>
                             <p>{courseDetails.description}</p>
                         </div>
@@ -127,7 +121,8 @@ console.log(isLoading);
                 </form>
             </div>
             
-    </React.Fragment>
+    </React.Fragment> 
+    )
     
     );
 
