@@ -13,7 +13,7 @@ function CreateCourse () {
     // Return path after course creation
     const { from } = location.state || { from: { pathname: "/"} }
 
-    // Component states
+    // Component state
     const[title, setTitle] = useState('');
     const[description, setDescription] = useState('');
     const[estimatedTime, setEstimatedTime] = useState('');
