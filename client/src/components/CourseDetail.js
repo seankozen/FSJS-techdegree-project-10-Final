@@ -14,7 +14,6 @@ const CourseDetail = () => {
    const [courseDetails, setCourseDetails] = useState([]);
    const [user, setUser] = useState('');
    const [isLoading, setLoadingState] = useState(true);
-   
 
    // Retrieve course data
     useEffect(() => {
@@ -22,10 +21,10 @@ const CourseDetail = () => {
             .then ((response) => {
                     if(response.status === 404) {
                         history.push('/notfound');
+                       
                     } else {
                         setCourseDetails(response.course);
                         setUser(response.course.User);
-                        //setLoadingState(false);   //Indicates loading is done and page can be rendered
                     }   
             })
             .catch(error => {
@@ -73,6 +72,7 @@ if (authUser) {
 }
   
 
+  
     return (
        isLoading ?
             <h2>Loading...</h2>
@@ -101,10 +101,7 @@ if (authUser) {
                     <div className="main--flex">
                         <div>
                             <h3 className="course--detail--title">Course</h3>
-                            {/* {courseDetails ? */}
                             <h4 className="course--name">{courseDetails.title}</h4>
-                            {/* : <h4>Loading...</h4>
-                            } */}
                             <p>{courseDetails.User.firstName} {courseDetails.User.lastName}</p>
                             <p>{courseDetails.description}</p>
                         </div>
