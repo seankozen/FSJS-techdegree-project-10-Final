@@ -99,7 +99,7 @@ export default class UserSignUp extends Component {
         password,
     };
 
-
+    // Post new user data to database
     context.data.createUser(user)
         .then(errors => {
             if(errors.length) {

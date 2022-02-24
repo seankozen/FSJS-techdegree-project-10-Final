@@ -65,7 +65,8 @@ export default class UserSignIn extends Component {
         
         const { context } = this.props;
         const {emailAddress, password } = this.state;
-        
+
+        // Sign into app
         context.actions.signIn(emailAddress, password)
             .then(user => {
                 if(user === null) {

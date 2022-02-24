@@ -9,12 +9,14 @@ function Courses(){
     const [courses, setCoursesState ] = useState([]);
     const history = useHistory();
 
+    // Retrieve courses data
     useEffect(() => {
         context.data.getCourses()
             .then((response) => setCoursesState(response.courses))
             .catch(error=>history.push('./error'));
     },[history, context.data]);
 
+    // Map data to page
     const courseList = courses.map(course => {
         return (
             <Link className="course--module course--link" to={`/courses/${course.id}`} key = {course.id}>
