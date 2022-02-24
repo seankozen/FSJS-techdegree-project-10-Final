@@ -7,11 +7,12 @@ This app links to a school course database.  It allows the user to view, create,
 
 ## Getting the project up and running:
 
-    1. Download the Zip file and extract its contents.
-    2. Open the api folder and client folder in a text editor in seperate windows.
-    3. Install the dependencies:
-    ```
-    npm install
-    ```
-    
+ 1. Download the Zip file and extract its contents.
+ 2. Open the api folder and client folder in a text editor in seperate windows.
+ 3. Install the dependencies:
+
+```
+npm install
+```
+
 
