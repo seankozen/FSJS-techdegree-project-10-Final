@@ -63,7 +63,6 @@ export default class UserSignIn extends Component {
     //Submit email and password
     submit = () => {
         
-        
         const { context } = this.props;
         const {emailAddress, password } = this.state;
         
