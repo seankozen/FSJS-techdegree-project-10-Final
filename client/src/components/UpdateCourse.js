@@ -25,6 +25,9 @@ function UpdateCourse() {
             .then (response => {
                     if(response === 404) {
                         history.push('/notfound');
+                    if(response === 401) {
+                        history.push('/forbidden');
+                    }    
                     } else {
                         setTitle(response.course.title);
                         setDescription(response.course.description);
@@ -40,7 +43,6 @@ function UpdateCourse() {
             });  
     },[context.data, history, id]);
 
-        console.log(title);
 
     // Function to set state on change    
     const change = (event) => {
@@ -88,13 +90,7 @@ function UpdateCourse() {
         history.push(`/courses/${id}`);
     }
 
-    if (authUser) {
-        console.log(authUser);
-        console.log(authUser.emailAddress);
-        console.log(authUser.password);
-        console.log(authUser.id);
-    }
-
+  
     return (
         <div className="wrap">
             <h2>Update Course</h2>
