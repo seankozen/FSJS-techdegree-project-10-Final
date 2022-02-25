@@ -41,6 +41,9 @@ module.exports = (sequelize) => {
               notNull: {
                 msg: 'An email is required.'
               },
+              notEmpty: {
+                msg: 'Please provide an email address'
+              },
               isEmail: {
                 msg: 'Please provide a valid email address.'   
               }    
@@ -49,17 +52,22 @@ module.exports = (sequelize) => {
         password: {
             type: DataTypes.STRING,
             allowNull: false,
-            set(val) {
-              const hashedPassword = bcrypt.hashSync(val, 10);
-              this.setDataValue('password', hashedPassword);
-            },
             validate: {
               notNull: {
                 msg: 'A password is required'
               },
               notEmpty: {
                 msg: 'Please provide a password.'   
-              },   
+              },  
+              set(val) {
+                if(val.length >= 8 && val.length <= 18) {
+                  const hashedPassword = bcrypt.hashSync(val, 10);
+                  this.setDataValue('password', hashedPassword);
+                }
+                else {
+                  throw new Error("Passwords need to be between 8 and 18 characters.");
+                }
+              }, 
             },
         },
     }, { sequelize });
