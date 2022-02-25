@@ -25,6 +25,7 @@ function CourseDetail () {
                     if(response === 404) {    // Should be response === 404
                         history.push('/notfound');
                     } else {
+                        console.log(response.course);
                         setUser(response.course.User);
                         setTitle(response.course.title);
                         setDescription(response.course.description);
@@ -62,6 +63,7 @@ function CourseDetail () {
             })
     };
 
+    
 
     return (
              

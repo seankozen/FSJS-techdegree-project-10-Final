@@ -17,6 +17,7 @@ function UpdateCourse() {
     const[materialsNeeded, setMaterialsNeeded] = useState('');
     const[firstName, setFirstName] = useState('');
     const[lastName, setLastName] = useState('');
+    //const[userId, setUserId] = useState('');
     const[errors, setErrors] = useState('');
 
     // Get course information to populate update screen
@@ -24,10 +25,7 @@ function UpdateCourse() {
         context.data.getCourse(id)
             .then (response => {
                     if(response === 404) {
-                        history.push('/notfound');
-                    if(response === 401) {
-                        history.push('/forbidden');
-                    }    
+                        history.push('/notfound'); 
                     } else {
                         setTitle(response.course.title);
                         setDescription(response.course.description);
@@ -35,13 +33,18 @@ function UpdateCourse() {
                         setMaterialsNeeded(response.course.materialsNeeded);
                         setFirstName(response.course.User.firstName);
                         setLastName(response.course.User.lastName);
+                        //setUserId(response.course.userId);
                     }    
+                    // Direct to forbidden page if user not authorized to update page
+                    if (response.course.userId !== authUser.id){
+                        history.push('/forbidden');
+                    }
             })
             .catch(error => {
                 console.error(error);
                 history.push('./error');
             });  
-    },[context.data, history, id]);
+    },[context.data, history, id, authUser.id]);
 
 
     // Function to set state on change    
