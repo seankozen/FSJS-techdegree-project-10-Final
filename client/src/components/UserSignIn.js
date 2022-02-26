@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
 
+
 export default class UserSignIn extends Component {
     state = {
         emailAddress: '',
@@ -50,6 +51,7 @@ export default class UserSignIn extends Component {
         );
     }
 
+    
     //Set state in fields
     change = (event) => {
         const name = event.target.name;
@@ -67,19 +69,18 @@ export default class UserSignIn extends Component {
         
         const { context } = this.props;
         const {emailAddress, password } = this.state;
-        const { from } = this.props.location.state || { from: {pathname: '/'}};
-        console.log(from);
+        const { from } = this.props.location.state || { from: {pathname: '/courses'}};
 
         // Sign into app
         context.actions.signIn(emailAddress, password)
             .then(user => {
                 if(user === null) {
                     this.setState(() => {
-                        return { errors: ['Sign-in was unsuccessful']}
+                        return { errors: ['Email address and password are required.']}
                     });
                 } else {
-                    //this.props.history.goBack();
-                    this.props.history.push(from);
+                    // Redirect user to previous page upon sign in completion
+                    this.props.history.push(from);   
                     console.log(`${emailAddress} is logged in!`); 
                 }
             })

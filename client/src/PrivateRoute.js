@@ -9,6 +9,7 @@ const privateRoute = ({ component: Component, ...rest}) => {
                 <Route
                     {...rest}
                     render={props => context.authenticatedUser ? (
+                    
                         <Component {...props} />
                         ) 
                         : 
