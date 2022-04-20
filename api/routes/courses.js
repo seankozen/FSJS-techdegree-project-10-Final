@@ -6,6 +6,8 @@ const { User, Course } = require('../models');	//Require User and Course Models
 const { authenticateUser } = require('../middleware/auth-user'); //Require authentication middleware
 const { asyncHandler } = require('../middleware/async-handler'); //Require async middleware
 
+
+
 // Get all courses and the users associated with them 
 router.get("/", asyncHandler( async (req, res) => {
 	const courses = await Course.findAll({
@@ -19,6 +21,7 @@ router.get("/", asyncHandler( async (req, res) => {
 	});
 	res.json({courses}).status(200);  
 }));
+
 
 // Gets specific course with the associated user
 router.get('/:id', asyncHandler( async(req, res) => {
@@ -92,5 +95,7 @@ router.delete('/:id', authenticateUser, asyncHandler( async(req, res) => {
 		res.status(403).json({message: error.message});
 	}
 }));
+
+
 
 module.exports = router;
